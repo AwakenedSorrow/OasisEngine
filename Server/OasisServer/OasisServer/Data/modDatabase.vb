@@ -34,24 +34,22 @@ errorhandler:
             'Disable whitespace so that we don't have to read over whitespaces
             Reader.WhitespaceHandling = WhitespaceHandling.None
 
-            ' Read past the starting line and <config> tag.
+            ' Read past the stuff we're not using to actually retrieve data from.
+            ' I know there's more efficient and dynamic ways to load data from an XML file.
+            ' But frankly, I don't care. I only need a linear list of data anyhow.
+            Reader.Read()
             Reader.Read()
             Reader.Read()
 
             ' Read all the settings.
-            Reader.Read()
             Options.GameName = Reader.ReadElementString("gamename")
             Options.IP = Reader.ReadElementString("bindip")
             Options.Port = Val(Reader.ReadElementString("bindport"))
             Options.MaxConn = Val(Reader.ReadElementString("maxconn"))
             TempVal = Reader.ReadElementString("log")
-            If TempVal.ToLower = "true" Then
-                Options.Logging = True
-            End If
+            If TempVal.ToLower = "true" Then Options.Logging = True
             TempVal = Reader.ReadElementString("lock")
-            If TempVal.ToLower = "true" Then
-                Options.Lock = True
-            End If
+            If TempVal.ToLower = "true" Then Options.Lock = True
 
             ' Close the Reader.
             Reader.Close()
@@ -62,6 +60,8 @@ errorhandler:
             Options.IP = "0.0.0.0"
             Options.Port = "4000"
             Options.MaxConn = "32"
+            Options.Logging = True
+            Options.Lock = False
         End If
         AddText("Config Loaded!")
     End Sub
