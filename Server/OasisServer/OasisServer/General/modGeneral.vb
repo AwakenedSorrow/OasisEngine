@@ -5,6 +5,7 @@
 
         ' Set the Console Title to state we're loading the server.
         Console.Title = "Loading..."        
+        AddText("Initializing Server..")
 
         ' Load Server Options.
         LoadOptions()
@@ -14,7 +15,7 @@
 
         ' Done Initializing.
         ' We should probably start getting on with it now.
-        Addtext(">> Done Initializing.. Starting Server Loop Thread Now..")
+        AddText("Done Initializing!")
         SLoop.Start()
 
         ' Error Handler
@@ -25,15 +26,24 @@ errorhandler:
     End Sub
 
     Public Sub HandleError(ByVal Loc As String, ByVal Number As String, ByVal Desc As String)
+        Dim objWriter As New System.IO.StreamWriter(App_Path() + ERROR_LOG, True)
+
+        AddText("!!! --- !!!")
         AddText("An error has occured in " + Loc.Trim)
         AddText("Error #" + Number.Trim + " : " + Desc.Trim)
         AddText("The server will attempt to continue running.")
+        AddText("!!! --- !!!")
+
+        objWriter.WriteLine("---")
+        objWriter.WriteLine("An error has occured in " + Loc.Trim)
+        objWriter.WriteLine("Error #" + Number.Trim + " : " + Desc.Trim)
+        objWriter.WriteLine("---")
+
+        objWriter.Close()
     End Sub
 
     Public Sub AddText(ByVal Text As String)
-        ' No error handler here.
-        ' Why you ask? Well, if this line bugs out the HandleError sub won't work either.
-        Console.WriteLine(Text)
+        Console.WriteLine("[" + DateTime.Now.ToLongTimeString() + "]>> " + Text)
     End Sub
 
 End Module

@@ -4,6 +4,7 @@
 
     ' General Server Information
     Public IsRunning As Boolean = False
-    Public WINDOW_TITLE as String
+    Public WINDOW_TITLE As String
+    Public GameCPS As Integer
 
 End Module
