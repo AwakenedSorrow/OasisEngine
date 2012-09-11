@@ -21,7 +21,7 @@ errorhandler:
     End Function
 
     Public Sub LoadOptions(Optional ByVal Filename As String = CONFIG_FILE)
-        Dim Reader As XmlTextReader
+        Dim Reader As XmlTextReader, TempVal As String
 
         ' Check if the Config File exists, if it doesn't.. Well, we'll just use the default settings.
         AddText("Looking for '" + App_Path() + Filename.Trim + "'..")
@@ -44,6 +44,14 @@ errorhandler:
             Options.IP = Reader.ReadElementString("bindip")
             Options.Port = Val(Reader.ReadElementString("bindport"))
             Options.MaxConn = Val(Reader.ReadElementString("maxconn"))
+            TempVal = Reader.ReadElementString("log")
+            If TempVal.ToLower = "true" Then
+                Options.Logging = True
+            End If
+            TempVal = Reader.ReadElementString("lock")
+            If TempVal.ToLower = "true" Then
+                Options.Lock = True
+            End If
 
             ' Close the Reader.
             Reader.Close()

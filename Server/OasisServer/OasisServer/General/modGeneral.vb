@@ -34,10 +34,12 @@ errorhandler:
         AddText("The server will attempt to continue running.", True)
         AddText("!!! --- !!!", True)
 
-        objWriter.WriteLine("---")
-        objWriter.WriteLine("An error has occured in " + Loc.Trim)
-        objWriter.WriteLine("Error #" + Number.Trim + " : " + Desc.Trim)
-        objWriter.WriteLine("---")
+        If Options.Logging Then
+            objWriter.WriteLine("---")
+            objWriter.WriteLine("An error has occured in " + Loc.Trim)
+            objWriter.WriteLine("Error #" + Number.Trim + " : " + Desc.Trim)
+            objWriter.WriteLine("---")
+        End If
 
         objWriter.Close()
     End Sub
@@ -48,7 +50,7 @@ errorhandler:
         Console.WriteLine("[" + DateTime.Now.ToLongTimeString() + "] " + Text)
 
         ' If not an error message, write it to the serverlog.
-        If Not Ignore Then
+        If Not Ignore And Options.Logging Then
             ' Open the writer.
             Dim objWriter As New System.IO.StreamWriter(App_Path() + SERVER_LOG, True)
 

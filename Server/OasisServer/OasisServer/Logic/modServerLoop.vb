@@ -21,6 +21,9 @@
             ElapsedTime = Tick - FrameTime
             FrameTime = Tick
 
+            ' If we have it locked, sleep so we don't use a crapload of system resources.
+            If Options.Lock Then Sleep(1)
+
             ' Calculate the CPS we're currently running at.
             If TickCPS < Tick Then
                 ' Reset the Timer.
