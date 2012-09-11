@@ -28,11 +28,11 @@ errorhandler:
     Public Sub HandleError(ByVal Loc As String, ByVal Number As String, ByVal Desc As String)
         Dim objWriter As New System.IO.StreamWriter(App_Path() + ERROR_LOG, True)
 
-        AddText("!!! --- !!!")
-        AddText("An error has occured in " + Loc.Trim)
-        AddText("Error #" + Number.Trim + " : " + Desc.Trim)
-        AddText("The server will attempt to continue running.")
-        AddText("!!! --- !!!")
+        AddText("!!! --- !!!", True)
+        AddText("An error has occured in " + Loc.Trim, True)
+        AddText("Error #" + Number.Trim + " : " + Desc.Trim, True)
+        AddText("The server will attempt to continue running.", True)
+        AddText("!!! --- !!!", True)
 
         objWriter.WriteLine("---")
         objWriter.WriteLine("An error has occured in " + Loc.Trim)
@@ -42,8 +42,22 @@ errorhandler:
         objWriter.Close()
     End Sub
 
-    Public Sub AddText(ByVal Text As String)
-        Console.WriteLine("[" + DateTime.Now.ToLongTimeString() + "]>> " + Text)
+    Public Sub AddText(ByVal Text As String, Optional ByVal Ignore As Boolean = False)
+
+        ' Write the Console Line
+        Console.WriteLine("[" + DateTime.Now.ToLongTimeString() + "] " + Text)
+
+        ' If not an error message, write it to the serverlog.
+        If Not Ignore Then
+            ' Open the writer.
+            Dim objWriter As New System.IO.StreamWriter(App_Path() + SERVER_LOG, True)
+
+            ' Write the data.
+            objWriter.WriteLine("[" + DateTime.Now.ToString + "] " + Text)
+
+            ' Close the writer again.
+            objWriter.Close()
+        End If
     End Sub
 
 End Module

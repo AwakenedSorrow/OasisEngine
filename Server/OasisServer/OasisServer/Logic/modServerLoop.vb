@@ -27,7 +27,7 @@
                 TickCPS = GetTickCount + 1000
 
                 ' Update the Console Title.
-                Console.Title = WINDOW_TITLE + " | CPS: " + Format(Str(CPS).Trim, "#,###,###,###")
+                Console.Title = WINDOW_TITLE + " | CPS: " + Format(CPS, "#,###,###,###")
 
                 ' Reset the value
                 CPS = 0

@@ -3,5 +3,6 @@
     ' Configuration Constants.
     Public Const CONFIG_FILE = "data\settings.xml"
     Public Const ERROR_LOG = "errorlog.txt"
+    Public Const SERVER_LOG = "serverlog.txt"
 
 End Module
