@@ -6,6 +6,7 @@
 
     Public Sub ServerLoop()
         Dim Tick As Integer, TickCPS As Integer, CPS As Integer, FrameTime As Integer, ElapsedTime As Integer
+        Dim IsRunning As Boolean = False
         ' We just entered this sub.
         ' Should probably set the loop to actually be ON.
         IsRunning = True
