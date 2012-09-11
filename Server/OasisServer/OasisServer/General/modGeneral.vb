@@ -2,13 +2,19 @@
 
     Sub Main()
         On Error GoTo errorhandler
+
+        ' Set the Console Title to state we're loading the server.
+        Console.Title = "Loading..."        
+
         ' Load Server Options.
         LoadOptions()
-        Console.Title = Options.GameName + " | Bind IP: " + Options.IP + " | Bind Port: " + Str(Options.Port).Trim
+
+        ' We've loaded all these options, time to apply them to the WINDOW_TITLE variable.
+        WINDOW_TITLE = Options.GameName + " | Bind IP: " + Options.IP + " | Bind Port: " + Str(Options.Port).Trim
 
         ' Done Initializing.
         ' We should probably start getting on with it now.
-        Console.Write(">> Done Initializing.. Starting Server Loop Thread Now..")
+        Addtext(">> Done Initializing.. Starting Server Loop Thread Now..")
         SLoop.Start()
 
         ' Error Handler
