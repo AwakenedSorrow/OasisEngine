@@ -1,8 +1,9 @@
 ﻿Module modStructs
 
     Public Options As New OptionsStruct
+    Public Player() As PlayerStruct
 
-    Public Structure OptionsStruct
+    Structure OptionsStruct
         ' Game Options
         Dim GameName As String
 
@@ -14,6 +15,11 @@
         ' Debug
         Dim Logging As Boolean
         Dim Lock As Boolean
+    End Structure
+
+    Structure PlayerStruct
+        ' Connection Data
+        Dim ConnectionID As Integer
     End Structure
 
 End Module

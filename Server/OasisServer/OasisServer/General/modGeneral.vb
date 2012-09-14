@@ -13,6 +13,9 @@
         ' We've loaded all these options, time to apply them to the WINDOW_TITLE variable.
         WINDOW_TITLE = Options.GameName + " | Bind IP: " + Options.IP + " | Bind Port: " + Str(Options.Port).Trim
 
+        ' Set up the TCP stuff and get it all running.
+        MainTCPThread.Start()
+
         ' Done Initializing.
         ' We should probably start getting on with it now.
         AddText("Done Initializing!")
