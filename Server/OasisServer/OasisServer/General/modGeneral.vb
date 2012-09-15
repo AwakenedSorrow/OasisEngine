@@ -7,6 +7,12 @@
         Console.Title = "Loading..."        
         AddText("Initializing Server..")
 
+        'make sure stuff is there...
+        ' Check if the directory is there, if its not make it
+        If LCase$(Dir(App_Path() & "\Data\logs", vbDirectory)) <> "logs" Then
+            Call MkDir(App_Path() & "\Data\logs")
+        End If
+
         ' Load Server Options.
         LoadOptions()
 
