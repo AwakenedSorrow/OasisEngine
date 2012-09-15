@@ -1,5 +1,6 @@
 ﻿Imports System.Xml
 Imports System.IO.File
+Imports System.Text
 
 Module modDatabase
 
@@ -16,12 +17,14 @@ Module modDatabase
         ' Error Handler
         Exit Function
 errorhandler:
-        HandleError("modDatabase, Function FileExists()", Err.Number.ToString, Err.Description)
+        HandleError("modDatabase, Function " & (New System.Diagnostics.StackFrame()).GetMethod().Name, Err.Number.ToString, Err.Description)
         Exit Function
     End Function
 
     Public Sub LoadOptions(Optional ByVal Filename As String = CONFIG_FILE)
         Dim Reader As XmlTextReader, TempVal As String
+
+        On Error GoTo errorhandler
 
         ' Check if the Config File exists, if it doesn't.. Well, we'll just use the default settings.
         AddText("Looking for '" + App_Path() + Filename.Trim + "'..")
@@ -62,8 +65,49 @@ errorhandler:
             Options.MaxConn = "32"
             Options.Logging = True
             Options.Lock = False
+
+            'Save These Options
+            SaveOptions()
         End If
         AddText("Config Loaded!")
+
+        ' Error Handler
+        Exit Sub
+errorhandler:
+        HandleError("modDatabase, Function " & (New System.Diagnostics.StackFrame()).GetMethod().Name, Err.Number.ToString, Err.Description)
+        Exit Sub
+    End Sub
+
+    Public Sub SaveOptions(Optional ByVal Filename As String = CONFIG_FILE)
+        Dim Writer As XmlTextWriter
+
+        On Error GoTo errorhandler
+
+        ' Open a Text Writer instance
+        Writer = New XmlTextWriter(App_Path() + Filename, Encoding.UTF8)
+
+        'start writing!
+        Writer.WriteStartDocument()
+        Writer.WriteStartElement("options")
+
+        ' Write all the settings.
+        Writer.WriteElementString("gamename", Options.GameName)
+        Writer.WriteElementString("bindip", Options.IP)
+        Writer.WriteElementString("bindport", Options.Port)
+        Writer.WriteElementString("maxconn", Options.MaxConn)
+        Writer.WriteElementString("log", Options.Logging)
+        Writer.WriteElementString("lock", Options.Lock)
+
+        'close everything
+        Writer.WriteEndElement()
+        Writer.WriteEndDocument()
+        Writer.Close()
+
+        ' Error Handler
+        Exit Sub
+errorhandler:
+        HandleError("modDatabase, Function " & (New System.Diagnostics.StackFrame()).GetMethod().Name, Err.Number.ToString, Err.Description)
+        Exit Sub
     End Sub
 
     Public Function App_Path() As String
