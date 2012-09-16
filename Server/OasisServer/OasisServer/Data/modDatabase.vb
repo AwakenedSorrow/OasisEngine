@@ -17,7 +17,7 @@ Module modDatabase
         ' Error Handler
         Exit Function
 errorhandler:
-        HandleError("modDatabase, Function " & (New System.Diagnostics.StackFrame()).GetMethod().Name, Err.Number.ToString, Err.Description)
+        HandleError("modDatabase, Function " & GetFuncName(), Err.Number.ToString, Err.Description)
         Exit Function
     End Function
 
@@ -74,7 +74,7 @@ errorhandler:
         ' Error Handler
         Exit Sub
 errorhandler:
-        HandleError("modDatabase, Function " & (New System.Diagnostics.StackFrame()).GetMethod().Name, Err.Number.ToString, Err.Description)
+        HandleError("modDatabase, Function " & GetFuncName(), Err.Number.ToString, Err.Description)
         Exit Sub
     End Sub
 
@@ -106,11 +106,16 @@ errorhandler:
         ' Error Handler
         Exit Sub
 errorhandler:
-        HandleError("modDatabase, Function " & (New System.Diagnostics.StackFrame()).GetMethod().Name, Err.Number.ToString, Err.Description)
+        HandleError("modDatabase, Function " & GetFuncName(), Err.Number.ToString, Err.Description)
         Exit Sub
     End Sub
 
     Public Function App_Path() As String
         Return System.AppDomain.CurrentDomain.BaseDirectory()
     End Function
+
+    Public Function GetFuncName()
+        Return New System.Diagnostics.StackFrame().GetMethod().Name
+    End Function
+
 End Module

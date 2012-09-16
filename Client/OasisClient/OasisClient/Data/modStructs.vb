@@ -3,6 +3,8 @@
     Public Player() As PlayerStruct
 
     Structure OptionsStruct
+        'log errors on/off
+        Dim Logging As Boolean
 
         ' Sound Options
         Dim MusicOn As Boolean

@@ -13,21 +13,15 @@
     End Sub
 
     Public Sub HandleError(ByVal Loc As String, ByVal Number As String, ByVal Desc As String)
-        'Dim objWriter As New System.IO.StreamWriter(App_Path() + ERROR_LOG, True)
+        Dim objWriter As New System.IO.StreamWriter(App_Path() + ERROR_LOG, True)
 
-        'AddText("!!! --- !!!", True)
-        'AddText("An error has occured in " + Loc.Trim, True)
-        'AddText("Error #" + Number.Trim + " : " + Desc.Trim, True)
-        'AddText("The server will attempt to continue running.", True)
-        'AddText("!!! --- !!!", True)
+        If Options.Logging Then
+            objWriter.WriteLine("---")
+            objWriter.WriteLine("An error has occured in " + Loc.Trim)
+            objWriter.WriteLine("Error #" + Number.Trim + " : " + Desc.Trim)
+            objWriter.WriteLine("---")
+        End If
 
-        'If Options.Logging Then
-        '    objWriter.WriteLine("---")
-        '    objWriter.WriteLine("An error has occured in " + Loc.Trim)
-        '    objWriter.WriteLine("Error #" + Number.Trim + " : " + Desc.Trim)
-        '    objWriter.WriteLine("---")
-        'End If
-
-        'objWriter.Close()
+        objWriter.Close()
     End Sub
 End Module
