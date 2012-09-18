@@ -1,37 +1,65 @@
-﻿Imports Microsoft.DirectX.AudioVideoPlayback
+﻿Imports SdlDotNet.Audio
 
 Module modSound
+
+    Public Sub InitSound()
+        
+    End Sub
+
+    Public Sub CloseSound()
+        If MusicStream Is Nothing Then Exit Sub
+
+        If MusicStream.ToString <> Nothing Then
+            MusicStream.Dispose()
+        End If
+
+        If SoundStream.ToString <> Nothing Then
+            SoundStream.Dispose()
+        End If
+
+        MusicStream.Close()
+        SoundStream.Close()
+    End Sub
+
     Public Sub PlayMusic(ByVal filename As String)
-        'If Not Options.Music = 1 Or Not FileExist(Application.StartupPath & MUSIC_PATH & filename) Then Exit Sub
-        If MusicPlayer Is Nothing Then
-            MusicPlayer = New Audio(Application.StartupPath & MUSIC_PATH & filename, True)
+        If Not Options.MusicOn = True Or Not FileExists(MUSIC_PATH & filename) Then Exit Sub
+
+        If MusicStream.ToString = App_Path() & MUSIC_PATH & filename Then Exit Sub
+
+        If MusicStream.ToString = Nothing Then
+            MusicStream = New Music(App_Path() & MUSIC_PATH & filename)
+            MusicStream.FadeIn(100, 500)
         Else
-            MusicPlayer.Dispose()
-            MusicPlayer = Nothing
-            MusicPlayer = New Audio(Application.StartupPath & MUSIC_PATH & filename, True)
+            MusicStream = New Music(App_Path() & MUSIC_PATH & filename)
+            MusicStream.FadeIn(100, 500)
         End If
     End Sub
 
     Public Sub StopMusic()
-        If MusicPlayer Is Nothing Then Exit Sub
-        MusicPlayer.Dispose()
-        MusicPlayer = Nothing
+        If MusicStream.ToString = Nothing Then Exit Sub
+
+        If MusicStream.ToString <> Nothing Then
+            MusicStream.Dispose()
+        End If
     End Sub
 
     Public Sub PlaySound(ByVal filename As String)
-        'If Not Options.Sound = 1 Or Not FileExist(Application.StartupPath & SOUND_PATH & filename) Then Exit Sub
-        If SoundPlayer Is Nothing Then
-            SoundPlayer = New Audio(Application.StartupPath & SOUND_PATH & filename, True)
+        If Not Options.SoundOn = True Or Not FileExists(SOUND_PATH & filename) Then Exit Sub
+        
+        If SoundStream.ToString = Nothing Then
+            SoundStream = New Music(App_Path() & SOUND_PATH & filename)
+            SoundStream.Play()
         Else
-            SoundPlayer.Dispose()
-            SoundPlayer = Nothing
-            SoundPlayer = New Audio(Application.StartupPath & SOUND_PATH & filename, True)
+            SoundStream = New Music(App_Path() & SOUND_PATH & filename)
+            SoundStream.Play()
         End If
     End Sub
 
     Public Sub StopSound()
-        If SoundPlayer Is Nothing Then Exit Sub
-        SoundPlayer.Dispose()
-        SoundPlayer = Nothing
+        If SoundStream.ToString = Nothing Then Exit Sub
+
+        If SoundStream.ToString <> Nothing Then
+            SoundStream.Dispose()
+        End If
     End Sub
 End Module

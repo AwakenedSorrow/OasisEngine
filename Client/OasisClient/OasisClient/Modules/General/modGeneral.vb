@@ -5,9 +5,22 @@
         ' First set the login menu to a proper location.. Would look kind of awkward near the side there would it not?
         frmMenu.picMenu.Location = New Point(frmMenu.Width / 2 - (frmMenu.picMenu.Width / 2), frmMenu.Height / 2 - (frmMenu.picMenu.Height / 2))
 
+        'load our options
+        LoadOptions()
+
+        'init sound system
+        'InitSound()
+
+        'play menu music
+        If Options.MusicOn = True And FileExists(MUSIC_PATH & "MainMenu.mp3") Then
+            PlayMusic("MainMenu.mp3")
+        End If
     End Sub
 
     Public Sub DestroyGame()
+        'Close system
+        CloseSound()
+
         frmMenu.Close()
         End
     End Sub

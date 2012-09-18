@@ -45,8 +45,8 @@ errorhandler:
             Reader.Read()
 
             ' Read all the settings.
-            Options.MusicOn = Reader.ReadElementString("MusicOn")
-            Options.SoundOn = Reader.ReadElementString("SoundOn")
+            Options.MusicOn = CBool(Reader.ReadElementString("MusicOn"))
+            Options.SoundOn = CBool(Reader.ReadElementString("SoundOn"))
 
             ' Close the Reader.
             Reader.Close()

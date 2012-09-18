@@ -150,10 +150,9 @@ Partial Class frmMenu
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.btn_Login)
         Me.Controls.Add(Me.picMenu)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Name = "frmMenu"
         Me.Text = "Form1"
-        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         CType(Me.picMenu, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
