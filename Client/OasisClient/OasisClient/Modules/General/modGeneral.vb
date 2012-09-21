@@ -12,7 +12,7 @@
         'InitSound()
 
         'play menu music
-        If Options.MusicOn = True And FileExists(MUSIC_PATH & "MainMenu.mp3") Then
+        If Options.MusicOn = True And FileExists(MUSIC_PATH & "town.mid") Then
             PlayMusic("MainMenu.mp3")
         End If
     End Sub
