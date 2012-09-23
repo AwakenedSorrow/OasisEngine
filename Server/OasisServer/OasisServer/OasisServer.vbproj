@@ -69,6 +69,7 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\clsBuffer.vb" />
     <Compile Include="Data\modConstants.vb" />
     <Compile Include="Data\modDatabase.vb" />
     <Compile Include="Data\modGlobals.vb" />
