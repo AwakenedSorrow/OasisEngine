@@ -1,4 +1,4 @@
-﻿Imports SdlDotNet.Audio
+﻿Imports System.Net.Sockets
 
 Module modGlobals
     'Music + Sound Players
@@ -7,4 +7,8 @@ Module modGlobals
 
     Public MusicStream As AudioFile
     Public MusicFile As String
+
+    'Network
+    Public clientSocket As New System.Net.Sockets.TcpClient()
+    Public serverStream As NetworkStream
 End Module

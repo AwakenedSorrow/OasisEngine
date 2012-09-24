@@ -60,7 +60,7 @@ errorhandler:
             AddText("File Doesn't Exist! Applying Default Config Data..")
             ' Set the Default Values.
             Options.GameName = "Oasis Server"
-            Options.IP = "0.0.0.0"
+            Options.IP = "127.0.0.1"
             Options.Port = "4000"
             Options.MaxConn = "32"
             Options.Logging = True

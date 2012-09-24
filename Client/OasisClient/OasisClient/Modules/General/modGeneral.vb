@@ -1,4 +1,6 @@
-﻿Module modGeneral
+﻿Imports System.Net.Sockets
+
+Module modGeneral
     Public Sub Main()
         ' Right, we're entering the program.. Load on brothers!
 
@@ -15,6 +17,9 @@
         If Options.MusicOn = True And FileExists(MUSIC_PATH & "town.mid") Then
             PlayMusic("MainMenu.mp3")
         End If
+
+        'Init Network
+        clientSocket.Connect(Options.IP, Options.Port)
     End Sub
 
     Public Sub DestroyGame()

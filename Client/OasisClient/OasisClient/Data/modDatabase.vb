@@ -47,6 +47,8 @@ errorhandler:
             ' Read all the settings.
             Options.MusicOn = CBool(Reader.ReadElementString("MusicOn"))
             Options.SoundOn = CBool(Reader.ReadElementString("SoundOn"))
+            Options.IP = Reader.ReadElementString("bindip")
+            Options.Port = Val(Reader.ReadElementString("bindport"))
 
             ' Close the Reader.
             Reader.Close()
@@ -55,12 +57,12 @@ errorhandler:
             ' Set the Default Values.
             Options.MusicOn = True
             Options.SoundOn = True
-
+            Options.IP = "127.0.0.1"
+            Options.Port = "4000"
 
             'Save These Options
             SaveOptions()
         End If
-        'AddText("Config Loaded!")
 
         ' Error Handler
         Exit Sub
@@ -84,6 +86,8 @@ errorhandler:
         ' Write all the settings.
         Writer.WriteElementString("MusicOn", Options.MusicOn)
         Writer.WriteElementString("SoundOn", Options.SoundOn)
+        Writer.WriteElementString("bindip", Options.IP)
+        Writer.WriteElementString("bindport", Options.Port)
 
         'close everything
         Writer.WriteEndElement()

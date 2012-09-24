@@ -10,6 +10,10 @@
         Dim MusicOn As Boolean
         Dim SoundOn As Integer
 
+        'Connection Options
+        Dim IP As String
+        Dim Port As Integer
+
     End Structure
 
     Structure PlayerStruct
